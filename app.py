@@ -6,32 +6,19 @@ from flask_jwt_simple import JWTManager, jwt_required, create_jwt, get_jwt_ident
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
-#from config import ProductionConfig, DevelopmentConfig
-
 # Init app
 app = Flask(__name__)
 
-# ENV = 'dev'
-
-# CORS_HEADERS = 'Content-Type'
-# SQLALCHEMY_TRACK_MODIFICATIONS = False
-# JWT_SECRET_KEY = os.environ['JWT_SECRET_KEY']
-
-
-# if ENV == 'dev':
-#     app.config.from_object(DevelopmentConfig())
-# else:
-#     app.config.from_object(ProductionConfig())
-
-
-# app.debug = os.environ['DEBUG']
+# Configuring app
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY']
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Init cors
 cors = CORS(app)
 
+# Init jwt
 jwt = JWTManager(app)
 
 # Init db
